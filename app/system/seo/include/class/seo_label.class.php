@@ -16,7 +16,7 @@ class seo_label {
 	public function __construct() {
 		global $_M;
 		$this->lang = $_M['lang'];
-		$query = "SELECT * FROM {$_M['table']['label']} where lang='{$_M['lang']}' order BY char_length(oldwords) DESC";
+		$query = "SELECT * FROM {$_M['table']['label']} where lang='{$_M['lang']}' order BY oldwords DESC";
 		$result = DB::query($query);
 		while($list = DB::fetch_array($result)) {
 			if(!$list['newwords']){

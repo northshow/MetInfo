@@ -43,8 +43,7 @@ class tabledata {
             /*查询表*/
             if($where){
                 $conds .= " WHERE {$where} ";
-            }
-            if($order){
+            }else if($order){
                 $conds .= " ORDER BY {$order} ";
             }
             //整理查询条件

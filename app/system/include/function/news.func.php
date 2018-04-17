@@ -11,7 +11,7 @@ function obtain($news_id,$newstitle,$content,$url,$member,$type,$lang,$time) {
 		$time = time();
 	}
 	//$query = " {$_M['table']['infoprompt']} SET news_id='{$news_id}',newstitle='{$newstitle}',content='{$content}',url='{$url}',member='{$member}',type='{$type}',time='{$time}',lang='{$lang}'";
-    $query = "INSERT INTO {$_M['table']['infoprompt']} ( news_id,newstitle,content,url,member,type,time,lang VALUES ({$news_id},{$newstitle},{$content},{$url},{$member},{$type},{$time},{$lang}";
+    $query = "INSERT INTO {$_M['table']['infoprompt']} ( news_id,newstitle,content,url,member,type,time,lang ) VALUES ('{$news_id}','{$newstitle}','{$content}','{$url}','{$member}','{$type}','{$time}','{$lang}')";
 	$result = DB::query($query);
 	
 }

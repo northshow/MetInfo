@@ -70,7 +70,10 @@ class DB {
 	 */
 	public static function get_one($sql, $type = ''){
 
-
+        if( self::isSelectLimit($sql))
+        {
+            return  self::Use_get_all_limit($sql);
+        }
 	    $result = self::query($sql, $type);
 		$rs = self::fetch_array($result);
 		//如果是前台可视化编辑模式
@@ -82,6 +85,27 @@ class DB {
 		self::free_result($result);
 		return $rs ;
 	}
+
+    static function isSelectLimit($sql)
+    {
+        $SELECT = 'SELECT';
+        if (stripos($sql, $SELECT)>=0 && stripos($sql, 'LIMIT')){
+            return true;
+        }
+        else{
+
+            return false;
+        }
+    }
+
+    static function Use_get_all_limit($mysql)
+    {
+        $sqlsrv = substr($mysql, stripos($mysql, 'LIMIT') + 5);
+        $keyvalues = explode(",", $sqlsrv);
+        $newsql = substr($mysql, 0,stripos($mysql, 'LIMIT')-1);
+        return self::get_all_limit($newsql , $keyvalues[0], $keyvalues[1]);
+    }
+
 
 
     public static function get_all_limit($sql, $start,$rows){
@@ -120,6 +144,11 @@ class DB {
         return $rs ;
     }
 	public static function get_all($sql, $type = ''){
+        if( self::isSelectLimit($sql))
+        {
+            return  self::Use_get_all_limit($sql);
+        }
+
         $result = self::query($sql, $type);
 		# 	MYSQLI_ASSOC - 默认。关联数组
         #	MYSQLI_NUM - 数字数组
@@ -154,18 +183,21 @@ class DB {
        // self::write($sql);
         $sql2= self:: convert2SqlSvr($sql);
        if( !$result = sqlsrv_query(self::$link,$sql2)){
-           self::errno();
+           die( print_r( sqlsrv_errors(), true));
        }
         return $result;
     }
+
+
+
     static function convert2SqlSvr($mysql)
     {
+        $sqlsrv = $mysql;
         $Insert= 'INSERT';
-        $SELECT ='SELECT';
-        if(strpos($mysql, $Insert)>0&&strpos($mysql, $Insert)<5 && strpos($mysql,'SET')>0 )
+        if(stripos($mysql, $Insert)!==false && stripos($mysql,'SET')>0 )
         {
-            $content1=  substr($mysql,strpos($mysql,'SET')+3);
-            $start =  substr($mysql,0,strpos($mysql,'SET'));
+            $content1=  substr($mysql,stripos($mysql,'SET')+3);
+            $start =  substr($mysql,0,stripos($mysql,'SET'));
                 //echo $start;
             $keyvalues = explode(",", $content1);
 
@@ -184,11 +216,16 @@ class DB {
                     $values.=$keyvalue[1].',';
                 }
             }
-
             $sqlsrv = $start.'('.$keys.') VALUES ('.$values.');';
-            return $sqlsrv;
+
         }
-        return $mysql;
+        elseif (stripos($mysql, 'UPDATE')!==false)
+        {
+            $sqlsrv =str_replace('`', ' ',$sqlsrv);
+
+        }
+        return self::convert2gbk ($sqlsrv);
+        //;
     }
 /**
 	 * 统计条数
