@@ -953,7 +953,7 @@ body{background-image: url(<?php echo $g['bodybgimg'];?>);background-position: c
         $$v = $v;
 ?>
                                 <li class="list-group-item news-li clearfix">
-                                    <span><?php echo $v['updatetime'];?></span>
+                                    <span></span>
                                     <a href="<?php echo $v['url'];?>" title="<?php echo $v['title'];?>" target="<?php echo $lang['met_listurlblank'];?>">
                                         <?php echo $v['title'];?>
                                     </a>
@@ -1045,7 +1045,7 @@ body{background-image: url(<?php echo $g['bodybgimg'];?>);background-position: c
         $$v = $v;
 ?>
                                 <li class="list-group-item news-li clearfix">
-                                    <span><?php echo $v['updatetime'];?></span>
+                                    <span></span>
                                     <a href="<?php echo $v['url'];?>" title="<?php echo $v['title'];?>" target="<?php echo $lang['met_listurlblank'];?>">
                                         <?php echo $v['title'];?>
                                     </a>
@@ -1137,7 +1137,7 @@ body{background-image: url(<?php echo $g['bodybgimg'];?>);background-position: c
         $$v = $v;
 ?>
                                 <li class="list-group-item news-li clearfix">
-                                    <span><?php echo $v['updatetime'];?></span>
+                                    <span></span>
                                     <a href="<?php echo $v['url'];?>" title="<?php echo $v['title'];?>" target="<?php echo $lang['met_listurlblank'];?>">
                                         <?php echo $v['title'];?>
                                     </a>

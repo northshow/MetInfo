@@ -183,7 +183,7 @@ class DB {
        // self::write($sql);
         $sql2= self:: convert2SqlSvr($sql);
        if( !$result = sqlsrv_query(self::$link,$sql2)){
-           die( print_r( sqlsrv_errors(), true));
+         //  die( print_r( self::convert2utf8(sqlsrv_errors()), true));
        }
         return $result;
     }
