@@ -64,12 +64,7 @@ class load {
 		return self::_load_class($filedir.$classdir['dir'], $classdir['file'], $action);
 
 	}
-	public static function app_func($classname) {
-		$funcname=str_replace('.func.php', '', $funcname);
-		$filedir = PATH_ALL_APP;
-		$funcdir = self::dir_get($funcname);
-		return self::_load_func($filedir.$funcdir['dir'], $funcdir['file']);
-	}
+
 	/**
 	 * 加载应用自定义类
 	 * @param string $classname 需要引用应用自定义类的类名，一般不需要加.class.php

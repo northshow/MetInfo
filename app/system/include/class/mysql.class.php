@@ -188,6 +188,11 @@ class DB {
         return $result;
     }
 
+    static function Count2SqlSvr($mysql)
+    {
+        $start =  substr($mysql,0,stripos($mysql,'order by'));
+        return $start;
+    }
 
 
     static function convert2SqlSvr($mysql)
@@ -237,7 +242,10 @@ class DB {
 	public static function counter($table_name,$where_str="", $field_name="*"){
 	    $where_str = trim($where_str);
 	    if(strtolower(substr($where_str,0,5))!='where' && $where_str) $where_str = "WHERE ".$where_str;
-	    $query = " SELECT COUNT($field_name) FROM $table_name $where_str ";
+
+        $sqlsrv_where_str= self::Count2SqlSvr($where_str);
+	    $query = " SELECT COUNT($field_name) FROM $table_name $sqlsrv_where_str ";
+
 	    $result = self::query($query);
         $row1= sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC);
 
@@ -250,14 +258,22 @@ class DB {
 	    /*$fetch_row = mysql_fetch_row($result);
 	    return $fetch_row[0];*/
 	}
-
+    public static function oneresult($sql){
+        $result = self::query($sql);
+        $row1= sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC);
+        foreach ($row1 as $key => $value)
+        {
+            $count=$value;
+        }
+        return   $count;
+     }
 	/**
 	 * 返回前一次 MySQL 操作所影响的记录行数。
 	 * @param   string  $dbname     选择的数据库名
 	 * @return  int                 执行成功，则返回受影响的行的数目，如果最近一次查询失败的话，函数返回 -1。
 	 */
 	public static function affected_rows() {
-        return self::$link->affected_rows;
+        return self::oneresult("SELECT @@rowcount AS 'RowCount'");
 		#return mysql_affected_rows(self::$link);
 	}
 
@@ -349,7 +365,7 @@ class DB {
 	 * @return       int    id号
 	 */
 	public static function insert_id() {
-        return self::$link->insert_id;
+	    return self::oneresult("SELECT @@IDENTITY AS 'Identity'");
 	}
 
 	/**

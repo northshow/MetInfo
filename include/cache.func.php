@@ -16,7 +16,7 @@ function cache_otherinfo($retype=1){
 }
 function cache_str(){
 	global $db,$met_label,$lang;
-	$query = "SELECT * FROM $met_label where lang='$lang' order BY char_length(oldwords) DESC";
+	$query = "SELECT * FROM $met_label where lang='$lang' order BY len(oldwords) DESC";
 	$result = $db->query($query);
 	while($list = $db->fetch_array($result)) {
 		if(!$list[newwords]){

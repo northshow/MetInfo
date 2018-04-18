@@ -94,7 +94,7 @@ class product_admin extends admin {
 				turnover("{$_M[url][own_form]}a=doindex");
 			}
 		}else{
-			turnover("{$_M[url][own_form]}a=doindex",'数据错误');
+			turnover("{$_M[url][own_form]}a=doindex",'数据错误4');
 		}
 
 	}
@@ -151,7 +151,7 @@ class product_admin extends admin {
 				turnover("{$_M[url][own_form]}a=doindex");
 			}
 		}else{
-			turnover("{$_M[url][own_form]}a=doindex",'数据错误');
+			turnover("{$_M[url][own_form]}a=doindex",'数据错误5');
 		}
 
 	}

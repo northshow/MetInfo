@@ -61,13 +61,6 @@ class news_admin extends base_admin {
 		global $_M;
 		$_M['form']['addtime'] = $_M['form']['addtype']==2?$_M['form']['addtime']:date("Y-m-d H:i:s");
 		if($this->insert_list($_M['form'])){
-			// if(1){
-			// 	turnover("./content/article/save.php?lang={$_M['lang']}&action=html&class1_select={$_M['form']['class1_select']}&class2_select={$_M['form']['class2_select']}&class3_select={$_M['form']['class3_select']}");
-			// }else{
-			// 	turnover("{$_M[url][own_form]}a=doindex");
-			//}
-			// dump($_M[form]);
-			// exit;
 		$url="{$_M[url][own_form]}a=doindex{$_M[form][turnurl]}";
 	    load::mod_class('html/html_op', 'new')->html_generate($url,$_M['form']['class1_select'],$_M['form']['id']);
 		}else{

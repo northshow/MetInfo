@@ -83,6 +83,7 @@ class database  {
 	}
 
 	public function update_sql($list) {
+        $sql='';
 		foreach ($list as $key => $val) {
 			if($key != 'id'){
 				if($this->is_para($key)){
@@ -99,6 +100,7 @@ class database  {
 	 * @return number         插入的id
 	 */
 	public function insert($list) {
+        $sql='';
 		foreach ($list as $key => $val) {
 			if($this->is_para($key)){
 				$sql .= " $key = '{$val}',";

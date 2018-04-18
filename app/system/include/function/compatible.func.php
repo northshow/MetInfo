@@ -185,7 +185,7 @@ function cache_otherinfo($retype=1){
 
 function cache_str(){
 	global $_M;
-	$query = "SELECT * FROM {$_M['table']['label']} WHERE lang='{$_M['lang']}' ORDER BY char_length(oldwords) DESC";
+	$query = "SELECT * FROM {$_M['table']['label']} WHERE lang='{$_M['lang']}' ORDER BY len(oldwords) DESC";
 	$result = DB::query($query);
 	while($list = DB::fetch_array($result)) {
 		$str_list_temp[0]=$list['oldwords'];

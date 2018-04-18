@@ -206,7 +206,7 @@ class link_admin extends base_admin {
 			 	turnover("{$_M[url][own_form]}a=doindex");
 			// }
 		}else{
-			turnover("{$_M[url][own_form]}a=doindex",'数据错误');
+			turnover("{$_M[url][own_form]}a=doindex",'数据错误6');
 		}
 
 	}

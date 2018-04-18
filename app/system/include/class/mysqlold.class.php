@@ -7,7 +7,7 @@ defined('IN_MET') or exit('No permission');
 /**
  * 数据库操作类
  */
-class DB {
+class DB_notuse {
 	public static $querynum = 0;
 	public static $link;
 	
@@ -252,7 +252,7 @@ class DB {
 	 * @return       int    id号
 	 */
 	public static function insert_id() {
-		return ($id = mysql_insert_id(self::$link)) >= 0 ? $id : self::result(self::query("SELECT last_insert_id()"), 0);
+		return ($id = mysql_insert_id(self::$link)) >= 0 ? $id : self::result(self::query("SELECT @@IDENTITY"), 0);
 	}
 
 	/**
